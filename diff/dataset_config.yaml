@@ -1,0 +1,89 @@
+# dataset_config.yaml
+ag_news:
+  train: ag_news
+  valid: ag_news
+  valid_split: test
+  columns_to_remove: ['text', 'label']
+  max_length: 128
+  n_iters: 150000
+  train_size: null  # null means use full dataset - don't supply here - directly supply as environment variable 
+
+imdb:
+  train: imdb
+  valid: imdb
+  valid_split: test
+  columns_to_remove: ['text', 'label']
+  max_length: 128
+  n_iters: 150000
+  train_size: null
+
+Sp1786/multiclass-sentiment-analysis-dataset:
+  train: Sp1786/multiclass-sentiment-analysis-dataset
+  valid: Sp1786/multiclass-sentiment-analysis-dataset
+  valid_split: test
+  columns_to_remove: ['text', 'label', 'id', 'sentiment']
+  max_length: 128
+  n_iters: 100000
+  train_size: null
+
+
+emotion:
+  train: emotion
+  valid: emotion
+  valid_split: test
+  columns_to_remove: ['text', 'label']
+  max_length: 128
+  n_iters: 150000
+  train_size: null
+
+
+SetFit/sst2:
+  train: SetFit/sst2 
+  valid: SetFit/sst2
+  valid_split: test
+  columns_to_remove: ['text', 'label', 'label_text']
+  max_length: 128
+  n_iters: 150000
+  train_size: null
+
+
+SetFit/sst5:
+  train: SetFit/sst5 
+  valid: SetFit/sst5
+  valid_split: test
+  columns_to_remove: ['text', 'label', 'label_text']
+  max_length: 128
+  n_iters: 150000
+  train_size: null
+
+
+SetFit/hate_speech_offensive:
+  train: SetFit/hate_speech_offensive 
+  valid: SetFit/hate_speech_offensive
+  valid_split: test
+  columns_to_remove: ['text', 'label', 'label_text']
+  max_length: 128
+  n_iters: 150000
+  train_size: null
+
+
+
+
+zeroshot/twitter-financial-news-sentiment:
+  train: zeroshot/twitter-financial-news-sentiment 
+  valid: zeroshot/twitter-financial-news-sentiment
+  valid_split: validation
+  columns_to_remove: ['text', 'label']
+  max_length: 128
+  n_iters: 150000
+  train_size: null
+
+
+cornell-movie-review-data/rotten_tomatoes:
+  train: cornell-movie-review-data/rotten_tomatoes
+  valid: cornell-movie-review-data/rotten_tomatoes
+  valid_split: test
+  columns_to_remove: ['text', 'label']
+  max_length: 128
+  n_iters: 150000
+  train_size: null
