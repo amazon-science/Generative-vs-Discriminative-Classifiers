@@ -1,28 +1,261 @@
+# Generative vs Discriminative Text Classification: A Comprehensive Comparison
 
-# Code Repo Structure 
+[![arXiv](https://img.shields.io/badge/arXiv-2506.12181-b31b1b.svg)](https://arxiv.org/abs/2506.12181)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
-The repository is organized into the following main folders:
+This repository contains the official implementation for the paper **"Generative or Discriminative? Revisiting Text Classification in the Era of Transformers"** by Siva Rajesh Kasa et al.
 
-- `ar/`: Contains autoregressive classifier models and related code
-- `ar_pseudo/`: Contains autoregressive-pseudo variant classifier models and related code
-- `diff/`: Contains diffusion classifier models implementation
-- `encoder_mlm/`: Contains encoder classifier and masked language classifier model implementations
+## 📖 Abstract
 
+The comparison between discriminative and generative classifiers has intrigued researchers since Efron's seminal analysis of logistic regression versus discriminant analysis. While early theoretical work established that generative classifiers exhibit lower sample complexity but higher asymptotic error in simple linear settings, these trade-offs remain unexplored in the transformer era. We present the first comprehensive evaluation of modern generative and discriminative architectures - Auto-regressive modeling, Masked Language Modeling, Discrete Diffusion, and Encoders for text classification.
 
-# Conda environment 
+## 🏗️ Repository Structure
 
-The yml file for installing the conda environment is present in the respective folders as `environment.yml` file. 
+```
+├── README.md                    # This file
+├── ar/                         # Autoregressive classifier models
+│   ├── environment.yml         # Conda environment for AR models
+│   ├── train_gpt.py           # Training script for GPT-based classifiers
+│   └── infer_gpt.py           # Inference script for GPT-based classifiers
+├── ar_pseudo/                  # Pseudo-autoregressive variant classifiers
+│   ├── environment.yml         # Conda environment for pseudo-AR models
+│   ├── train_gpt.py           # Training script for pseudo-AR classifiers
+│   └── infer_gpt.py           # Inference script for pseudo-AR classifiers
+├── diff/                       # Discrete diffusion classifier models
+│   ├── README.md              # Detailed documentation for diffusion models
+│   ├── environment.yml        # Conda environment for diffusion models
+│   ├── run_train.py          # Training script
+│   ├── run_sample.py         # Sampling script
+│   ├── parallel_inference.py # Parallel inference for classification
+│   ├── model/                # Model architectures
+│   ├── configs/              # Configuration files
+│   └── ...                   # Additional diffusion-related files
+└── encoder_mlm/               # Encoder and MLM classifier models
+    ├── environment.yml        # Conda environment for encoder models
+    ├── mlm_classif_seed_fixed.py  # Training script with fixed seeds
+    └── inference.py           # Inference script
+```
 
+## 🚀 Quick Start
 
-# Training and inference 
+**New to this repository?** Check out our [**Quick Start Guide**](QUICKSTART.md) for step-by-step instructions!
 
-- `ar/` and `ar_pseudo/`: train_gpt.py for training and infer_gpt.py for inference
-- `diff/`: run_exps.sh for training and parallel_inference.py for inference
-- `encoder_mlm/`: mlm_classif_seed_fixed.py for training and inference.py for inference
+### Automated Setup
 
+Use our setup script for easy environment configuration:
 
+```bash
+# Check prerequisites and list approaches
+python setup.py --check
+python setup.py --list
 
+# Setup your chosen approach
+python setup.py --approach ar          # Autoregressive models
+python setup.py --approach diffusion  # Diffusion models  
+python setup.py --approach encoder    # Encoder models
+```
 
+### Quick Demo
 
+Run a quick demo to verify your setup:
 
+```bash
+# Automated comprehensive demo (recommended)
+./examples/run_comprehensive_experiments.sh demo
+```
 
+### Manual Installation
+
+If you prefer manual setup, each component has its own environment:
+
+#### 1. Autoregressive Models (AR)
+```bash
+cd ar/
+conda env create -f environment.yml
+conda activate gendisc
+```
+
+#### 2. Pseudo-Autoregressive Models (AR-Pseudo)
+```bash
+cd ar_pseudo/
+conda env create -f environment.yml
+conda activate gendisc
+```
+
+#### 3. Discrete Diffusion Models
+```bash
+cd diff/
+conda env create -f environment.yml
+conda activate sedd
+```
+
+#### 4. Encoder/MLM Models
+```bash
+cd encoder_mlm/
+conda env create -f environment.yml
+conda activate encoder_mlm
+```
+
+## 🔬 Experiments
+
+### Autoregressive Classification
+
+Train GPT-based classifiers using generative modeling:
+
+```bash
+cd ar/
+python train_gpt.py \
+    --data_key "SetFit/sst2" \
+    --ckpt_dir "./checkpoints/ar_sst2" \
+    --model_size "small" \
+    --max_epochs 50 \
+    --bsz 8
+```
+
+**Key Parameters:**
+- `--data_key`: Dataset identifier (e.g., "SetFit/sst2", "emotion", "ag_news")
+- `--model_size`: Model size ("small", "medium", "full")
+- `--n_devices`: Number of GPUs to use
+- `--max_len`: Maximum sequence length
+- `--seed`: Random seed for reproducibility
+
+### Discrete Diffusion Classification
+
+Train discrete diffusion models for text classification:
+
+```bash
+cd diff/
+python run_train.py \
+    noise.type=loglinear \
+    graph.type=absorb \
+    model=small \
+    training.accum=1
+```
+
+For inference:
+```bash
+python parallel_inference.py \
+    --model_path "path/to/trained/model" \
+    --dataset "ag_news" \
+    --batch_size 32
+```
+
+### Encoder/MLM Classification
+
+Run comprehensive experiments with BERT-based models:
+
+```bash
+cd encoder_mlm/
+python mlm_classif_seed_fixed.py
+```
+
+This script runs experiments across:
+- Multiple datasets (emotion, sst2, ag_news, etc.)
+- Different model sizes (1 layer, 6 layers, 12 layers)
+- Various training sample sizes (128, 256, 512, 1024, 2048, 4096, full)
+- Multiple random seeds for statistical significance
+- Both MLM pretraining and direct classification approaches
+
+## 📊 Supported Datasets
+
+The repository supports various text classification datasets:
+
+- **Sentiment Analysis**: SST-2, SST-5, IMDb, Rotten Tomatoes
+- **Topic Classification**: AG News
+- **Emotion Detection**: Emotion dataset
+- **Hate Speech Detection**: Hate Speech Offensive
+- **Multi-class Sentiment**: Multi-class sentiment analysis
+- **Financial News**: Twitter Financial News Sentiment
+
+## 🔧 Model Architectures
+
+### 1. Autoregressive (AR) Models
+- GPT-2 based architecture
+- Generative approach: P(label|text) via likelihood estimation
+- Configurable model sizes (small, medium, full)
+
+### 2. Pseudo-Autoregressive Models
+- Modified autoregressive approach
+- Hybrid generative-discriminative training
+
+### 3. Discrete Diffusion Models
+- Score-based discrete diffusion
+- Novel application to text classification
+- Supports both uniform and absorbing noise schedules
+
+### 4. Encoder Models
+- BERT-based discriminative classifiers
+- Masked Language Model (MLM) pretraining option
+- Standard discriminative approach: direct classification head
+
+## 📈 Key Findings
+
+Our comprehensive evaluation reveals:
+
+1. **Sample Efficiency**: Generative models show superior performance in low-data regimes
+2. **Asymptotic Performance**: Discriminative models achieve better performance with abundant data
+3. **Calibration**: Different architectures exhibit varying calibration properties
+4. **Robustness**: Noise robustness varies significantly across approaches
+5. **Computational Trade-offs**: Inference speed vs. accuracy considerations
+
+## 🛠️ Customization
+
+### Adding New Datasets
+
+To add support for new datasets, modify the dataset loading functions in each component:
+
+- **AR models**: Update `get_dataset()` in `train_gpt.py`
+- **Diffusion models**: Modify `get_dataset()` in `data.py`
+- **Encoder models**: Add dataset path in `DATASET_PATH` dictionary
+
+### Model Configuration
+
+Each component supports extensive configuration:
+
+- **AR models**: Modify model architecture in `GPT2Classifier` class
+- **Diffusion models**: Use Hydra configs in `configs/` directory
+- **Encoder models**: Adjust `MODEL_CONFIGS` for different architectures
+
+## 📝 Citation
+
+If you use this code in your research, please cite our paper:
+
+```bibtex
+@article{kasa2025generative,
+  title={Generative or Discriminative? Revisiting Text Classification in the Era of Transformers},
+  author={Kasa, Siva Rajesh and Gupta, Karan and Roychowdhury, Sumegh and Kumar, Ashutosh and Biruduraju, Yaswanth and Kasa, Santhosh Kumar and Pattisapu, Nikhil Priyatam and Bhattacharya, Arindam and Agarwal, Shailendra and huddar, Vijay},
+  journal={arXiv preprint arXiv:2506.12181},
+  year={2025}
+}
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to:
+
+1. Report bugs or issues
+2. Suggest new features or improvements
+3. Submit pull requests with enhancements
+4. Add support for new datasets or models
+
+## 📄 License
+
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+This work builds upon several excellent open-source projects:
+- [Transformers](https://github.com/huggingface/transformers) by Hugging Face
+- [PyTorch Lightning](https://github.com/Lightning-AI/lightning) for training infrastructure
+- [Score SDE](https://github.com/yang-song/score_sde_pytorch) for diffusion model foundations
+- [PLAID](https://github.com/igul222/plaid) for discrete diffusion insights
+
+## 📞 Contact
+
+For questions or issues, please:
+1. Open an issue on GitHub
+2. Contact the corresponding authors via the paper
+
+---
+
+**Note**: This repository is actively maintained. Please check for updates and new features regularly.
