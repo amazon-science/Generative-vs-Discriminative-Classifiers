@@ -86,6 +86,9 @@ def get_dataset_subset(dataset, num_samples, seed):
     
     # For validation/test, take proportional samples
     val_or_test_size = len(dataset["test" if "test" in dataset else "validation"])
+    # NOTE: Using test split for validation here for illustration purposes only.
+    # In proper research setup, this should be changed to use validation split for hyperparameter tuning,
+    # with final performance evaluation on the test split to avoid overestimating performance.
     val_or_test_subset = (
         dataset["test" if "test" in dataset else "validation"]
         .shuffle(seed=seed)

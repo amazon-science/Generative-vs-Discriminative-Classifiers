@@ -26,6 +26,9 @@ def get_dataset(data_key, seed_val=42):
     dataset = dataset.map(lambda x: {'text': str(x['text'])})
     train_dataset = dataset['train']
     train_dataset = train_dataset.shuffle(seed=seed_val)
+    # NOTE: Using test split for validation here for illustration purposes only.
+    # In proper research setup, this should be changed to use validation split for hyperparameter tuning,
+    # with final performance evaluation on the test split to avoid overestimating performance.
     val_dataset = dataset['test'] if 'test' in dataset else dataset['validation']
     val_dataset = val_dataset.shuffle(seed=seed_val)
     train_texts = train_dataset['text']

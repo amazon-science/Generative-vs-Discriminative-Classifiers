@@ -245,6 +245,7 @@ This project is licensed under the Creative Commons Attribution-NonCommercial 4.
 ## 🙏 Acknowledgments
 
 This work builds upon several excellent open-source projects:
+- [Score Entropy Discrete Diffusion](https://github.com/louaaron/Score-Entropy-Discrete-Diffusion) by Aaron Lou et al. - Our discrete diffusion implementation is based on this foundational work
 - [Transformers](https://github.com/huggingface/transformers) by Hugging Face
 - [PyTorch Lightning](https://github.com/Lightning-AI/lightning) for training infrastructure
 - [Score SDE](https://github.com/yang-song/score_sde_pytorch) for diffusion model foundations
