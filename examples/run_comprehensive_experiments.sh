@@ -38,8 +38,8 @@ TRAIN_SIZES=(
 )
 
 # Model configurations
-AR_MODEL_SIZES=("small" "medium" "full")
-DIFF_MODEL_SIZES=("small" "medium")
+AR_MODEL_SIZES=("small" "medium" "large")
+DIFF_MODEL_SIZES=("small" "medium" "large")  # small=(1,1), medium=(6,6), large=(12,12)
 ENCODER_LAYER_CONFIGS=("1,1" "6,6" "12,12")  # layers,heads
 
 # Seeds for statistical significance
@@ -130,15 +130,14 @@ run_diffusion_experiments() {
                     {
                         echo "Starting Diffusion experiment: $experiment_name"
                         echo "Dataset: $dataset, Size: $size, Model: $model_size, Seed: $seed"
-                        echo "Environment: DATASET_NAME=$DATASET_NAME TRAIN_SIZE=$TRAIN_SIZE N_ITERS=$N_ITERS SEED=$SEED"
+                        echo "Environment: DATASET_NAME=$DATASET_NAME TRAIN_SIZE=$TRAIN_SIZE N_ITERS=$N_ITERS"
                         echo "Command: python train.py model=$model_size"
                         echo "----------------------------------------"
                         
                         if [ "$size" = "null" ]; then
-                            unset TRAIN_SIZE
-                            DATASET_NAME="$dataset" N_ITERS="$N_ITERS" SEED="$seed" python train.py model="$model_size"
+                            DATASET_NAME="$dataset" N_ITERS="$N_ITERS" python train.py model="$model_size"
                         else
-                            DATASET_NAME="$dataset" TRAIN_SIZE="$size" N_ITERS="$N_ITERS" SEED="$seed" python train.py model="$model_size"
+                            DATASET_NAME="$dataset" TRAIN_SIZE="$size" N_ITERS="$N_ITERS" python train.py model="$model_size"
                         fi
                         
                         echo "Completed Diffusion experiment: $experiment_name"

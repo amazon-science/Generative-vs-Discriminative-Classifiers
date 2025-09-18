@@ -40,19 +40,12 @@ def check_conda():
 
 def setup_environment(approach):
     """Set up the conda environment for the specified approach."""
-    approach_dirs = {
-        'ar': 'ar',
-        'ar_pseudo': 'ar_pseudo', 
-        'diffusion': 'diff',
-        'encoder': 'encoder_mlm'
-    }
-    
-    if approach not in approach_dirs:
-        print(f"Unknown approach: {approach}")
-        return False
-    
-    approach_dir = approach_dirs[approach]
-    env_file = Path(approach_dir) / "environment.yml"
+    # Simplified environment structure
+    if approach == 'diffusion':
+        env_file = Path('diff') / "environment.yml"
+    else:
+        # All transformer approaches use the same environment
+        env_file = Path("environment.yml")
     
     if not env_file.exists():
         print(f"Environment file not found: {env_file}")

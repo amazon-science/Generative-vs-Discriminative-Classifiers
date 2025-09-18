@@ -99,8 +99,8 @@ def lm1b_detokenizer(x):
 
 
 def lambada_detokenizer(text):
-    text = text.replace("“", '"')
-    text = text.replace("”", '"')
+    text = text.replace(""", '"')
+    text = text.replace(""", '"')
     return '\n'+text.strip()
 
 
@@ -457,4 +457,4 @@ def get_dataloaders(config, distributed=True, logger = None):
     # valid_set = get_dataset(config.data.valid, "validation" if config.data.valid != "Sp1786/multiclass-sentiment-analysis-dataset" else "test", cache_dir=config.data.cache_dir, block_size=config.model.length) # used for the second run of multiclass-sentinment
     # valid_set = train_set
     # making a smaller blocksize for sst5
-    # valid_set = get_dataset(config.data.valid, "validation" if config.data.valid != "sst5" else "test", cache_dir=config.data.cache_dir, block_size=50) 
+    # valid_set = get_dataset(config.data.valid, "validation" if config.data.valid != "sst5" else "test", cache_dir=config.data.cache_dir, block_size=50)

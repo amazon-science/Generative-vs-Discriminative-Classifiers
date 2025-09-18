@@ -1,39 +1,5 @@
 #!/bin/bash
 
-# Array of dataset names
-# datasets=(
-#     "imdb"
-#     "ag_news"
-#     "multiclass_sentiment"
-#     "emotion"
-#     "sst2"
-#     "sst5"
-#     "hatespeech"
-#     "twitfin"
-# )
-# datasets=(
-#     "ag_news"
-#     "zeroshot/twitter-financial-news-sentiment"
-#     "Sp1786/multiclass-sentiment-analysis-dataset"
-#     "ag_news"
-#     "zeroshot/twitter-financial-news-sentiment"
-#     "Sp1786/multiclass-sentiment-analysis-dataset"
-#     "ag_news"
-#     "zeroshot/twitter-financial-news-sentiment"
-#     "Sp1786/multiclass-sentiment-analysis-dataset"
-# )
-
-
-# datasets=(
-#     "imdb"
-#     "zeroshot/twitter-financial-news-sentiment"
-#     "Sp1786/multiclass-sentiment-analysis-dataset"
-#     "emotion"
-#     "SetFit/sst2"
-#     "SetFit/sst5"
-#     "SetFit/hate_speech_offensive"
-#     "cornell-movie-review-data/rotten_tomatoes"
-# )
 
 
 
@@ -79,23 +45,16 @@ datasets=(
 
 
 # # Array of training sizes (add 'null' for full dataset)
-# train_sizes=(
-#     "128"
-#     "512"
-#     "1024"
-#     "2048"
-#     "4096"
-#     "null"
-# )
-
-
 train_sizes=(
     "128"
     "512"
     "1024"
     "2048"
     "4096"
+    "null"
 )
+
+
 
 
 

@@ -13,12 +13,11 @@ The comparison between discriminative and generative classifiers has intrigued r
 
 ```
 ├── README.md                    # This file
+├── environment.yml             # Shared conda environment for AR, AR-Pseudo, and Encoder/MLM
 ├── ar/                         # Autoregressive classifier models
-│   ├── environment.yml         # Conda environment for AR models
 │   ├── train_gpt.py           # Training script for GPT-based classifiers
 │   └── infer_gpt.py           # Inference script for GPT-based classifiers
 ├── ar_pseudo/                  # Pseudo-autoregressive variant classifiers
-│   ├── environment.yml         # Conda environment for pseudo-AR models
 │   ├── train_gpt.py           # Training script for pseudo-AR classifiers
 │   └── infer_gpt.py           # Inference script for pseudo-AR classifiers
 ├── diff/                       # Discrete diffusion classifier models
@@ -31,14 +30,11 @@ The comparison between discriminative and generative classifiers has intrigued r
 │   ├── configs/              # Configuration files
 │   └── ...                   # Additional diffusion-related files
 └── encoder_mlm/               # Encoder and MLM classifier models
-    ├── environment.yml        # Conda environment for encoder models
     ├── mlm_classif_seed_fixed.py  # Training script with fixed seeds
     └── inference.py           # Inference script
 ```
 
 ## 🚀 Quick Start
-
-**New to this repository?** Check out our [**Quick Start Guide**](QUICKSTART.md) for step-by-step instructions!
 
 ### Automated Setup
 
@@ -66,34 +62,20 @@ Run a quick demo to verify your setup:
 
 ### Manual Installation
 
-If you prefer manual setup, each component has its own environment:
+If you prefer manual setup:
 
-#### 1. Autoregressive Models (AR)
+#### 1. AR, AR-Pseudo, and Encoder/MLM Models
 ```bash
-cd ar/
+# Shared environment for AR, AR-Pseudo, and Encoder/MLM approaches
 conda env create -f environment.yml
-conda activate gendisc
+conda activate gendisc-transformers
 ```
 
-#### 2. Pseudo-Autoregressive Models (AR-Pseudo)
-```bash
-cd ar_pseudo/
-conda env create -f environment.yml
-conda activate gendisc
-```
-
-#### 3. Discrete Diffusion Models
+#### 2. Discrete Diffusion Models
 ```bash
 cd diff/
 conda env create -f environment.yml
 conda activate sedd
-```
-
-#### 4. Encoder/MLM Models
-```bash
-cd encoder_mlm/
-conda env create -f environment.yml
-conda activate encoder_mlm
 ```
 
 ## 🔬 Experiments
@@ -125,11 +107,11 @@ Train discrete diffusion models for text classification:
 
 ```bash
 cd diff/
-python run_train.py \
-    noise.type=loglinear \
-    graph.type=absorb \
-    model=small \
-    training.accum=1
+# Single experiment with environment variables
+DATASET_NAME="SetFit/sst2" TRAIN_SIZE="1024" N_ITERS="50000" python train.py model=small
+
+# Or run comprehensive experiments across multiple datasets and sizes
+./run_exps.sh
 ```
 
 For inference:
@@ -182,6 +164,10 @@ The repository supports various text classification datasets:
 - Score-based discrete diffusion
 - Novel application to text classification
 - Supports both uniform and absorbing noise schedules
+- Three model configurations available:
+  - **small**: 1 layer, 1 attention head (1,1) - for quick experiments
+  - **medium**: 6 layers, 6 attention heads (6,6) - balanced performance
+  - **large**: 12 layers, 12 attention heads (12,12) - best performance
 
 ### 4. Encoder Models
 - BERT-based discriminative classifiers

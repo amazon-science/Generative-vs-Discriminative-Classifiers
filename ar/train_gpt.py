@@ -157,18 +157,8 @@ class GPT2Classifier(pl.LightningModule):
         self.val_preds.extend(preds.cpu().tolist())
         self.val_gts.extend(labels.cpu().tolist())
 
-    # def validation_step(self, batch, batch_idx):
-    #     texts = batch['text']
-    #     labels = batch['val_label']
-    #
-    #     preds = []
-    #     for text in texts:
-    #         pred = self.inference(text)
-    #         preds.append(pred)
-    #
-    #     self.val_preds.extend(preds)
-    #     self.val_gts.extend(labels.tolist())
 
+# uncomment for epoch-wise results
     # def on_validation_epoch_end(self):
     #     self.trainer.strategy.barrier()
     #     all_preds = self.all_gather(self.val_preds)

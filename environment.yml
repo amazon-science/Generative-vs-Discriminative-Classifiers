@@ -1,4 +1,4 @@
-name: /efs/users/kasasiva/envs/gendisc
+name: gendisc-transformers
 channels:
   - conda-forge
   - defaults
@@ -149,4 +149,4 @@ dependencies:
       - werkzeug==3.1.3
       - xxhash==3.5.0
       - yarl==1.20.0
-prefix: /efs/users/kasasiva/envs/gendisc
+prefix: /efs/users/foobar/envs/gendisc
