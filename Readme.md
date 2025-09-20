@@ -244,5 +244,3 @@ For questions or issues, please:
 2. Contact the corresponding authors via the paper
 
 ---
-
-**Note**: This repository is actively maintained. Please check for updates and new features regularly.
