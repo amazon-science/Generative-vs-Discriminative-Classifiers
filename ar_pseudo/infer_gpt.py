@@ -36,7 +36,7 @@ def eval_model(args, train_texts, train_labels, val_texts, val_labels, model_fpa
     print(f"Predictions using the model path {model_fpath}")
     # Write predictions to file
     output_dir = os.path.dirname(model_fpath)
-    output_file = os.path.join(output_dir, 'predictions_siva_format.csv')
+    output_file = os.path.join(output_dir, 'predictions_format.csv')
 
     # Initialize model
     model = GPT2Classifier.load_from_checkpoint(model_fpath)
