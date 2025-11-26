@@ -3,6 +3,9 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2506.12181-b31b1b.svg)](https://arxiv.org/abs/2506.12181)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
+> 🏆 **Outstanding Paper Award at EMNLP 2025** 
+> [Award Announcement](https://x.com/emnlpmeeting/status/1986922938856042713?s=20) | [arXiv Paper](https://arxiv.org/abs/2506.12181)
+
 This repository contains the official implementation for the paper **"Generative or Discriminative? Revisiting Text Classification in the Era of Transformers"** by Siva Rajesh Kasa et al.
 
 ## 📖 Abstract
@@ -62,17 +65,18 @@ Run a quick demo to verify your setup:
 
 ### Manual Installation
 
-If you prefer manual setup:
+If you prefer manual setup, note that **diffusion models require a separate conda environment**, while AR, AR-Pseudo, and Encoder/MLM models share a single environment:
 
-#### 1. AR, AR-Pseudo, and Encoder/MLM Models
+#### 1. Shared Environment: AR, AR-Pseudo, and Encoder/MLM Models
 ```bash
-# Shared environment for AR, AR-Pseudo, and Encoder/MLM approaches
+# Create shared environment for AR, AR-Pseudo, and Encoder/MLM approaches
 conda env create -f environment.yml
 conda activate gendisc-transformers
 ```
 
-#### 2. Discrete Diffusion Models
+#### 2. Separate Environment: Discrete Diffusion Models
 ```bash
+# Create separate environment for diffusion models
 cd diff/
 conda env create -f environment.yml
 conda activate sedd
